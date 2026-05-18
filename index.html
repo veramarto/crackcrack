@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crack Crack - El Joc</title>
+    <link rel="stylesheet" href="estils.css">
+</head>
+<body>
+
+    <header class="header">
+        <div class="logo-contenidor">
+    <img src="logocrackcrack.png" alt="Logo Crack Crack" class="logo-imatge">
+</div>
+        <nav class="nav">
+            <a href="index.html" class="btn-nav">INICI</a>
+            <a href="joc.html" class="btn-nav">JOC</a>
+            <a href="contacte.html" class="btn-nav">REGISTRE</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+    <div class="hero-content">
+        <h1>SALVA LA TEVA DOTZENA DE FILLS</h1>
+        <p>Ajuda a Sr. Eggou, l'ou més elegant del<br>món, a salvar els seus fills ous d'una cuina perillosa, plena d'utensilis que volen cuinar-lo.</p>
+        
+        <a href="joc.html" class="btn-jugar" onclick="reproduirPop(event)">JUGAR ARA!</a>
+    </div>
+    
+    <div class="image-placeholder">
+        <img src="ImatgePresent.jpg">
+    </div>
+</section>
+
+<audio id="audio-pop" src="pop.mp3"></audio>
+
+<script>
+function reproduirPop(event) {
+    const so = document.getElementById('audio-pop');
+    const desti = event.currentTarget.href;
+    
+    event.preventDefault();
+    
+    so.play();
+    
+    setTimeout(function() {
+        window.location.href = desti;
+    }, 250); 
+}
+</script>
+
+    <section class="historia">
+        <h2>LA HISTÒRIA DE SR. EGGOU</h2>
+        <div class="caixa-gran"><p>El Sr. Eggou només volia esmorzar tranquil… fins que va descobrir que ell ERA l’esmorzar. Ara haurà de rescatar la seva dotzena i fugir de la cuina abans d’acabar fet truita.</div>
+    </section>
+
+    <section class="enemics">
+        <h2>ELS ENEMICS</h2>
+        <div class="grid-enemics">
+            <div class="enemic">
+                <div class="img-placeholder"></div>
+                <h3>Ganivets Voladors</h3>
+                <p>Perillosos i esmolats. Esquiva'ls o seràs tallat en rodanxes!</p>
+            </div>
+            <div class="enemic">
+                <div class="img-placeholder"></div>
+                <h3>Batedores Boges</h3>
+                <p>Giren sense control. No deixis que et converteixin en truita!</p>
+            </div>
+            <div class="enemic">
+                <div class="img-placeholder"><img src="focenemic.jpg" alt="Enemic el Foc" class="img-enemic"></div>
+                <h3>El Foc</h3>
+                <p>La temperatura molt alta pot arribar a cuinar-te!</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <img src="logocrackcrack.png" alt="Logo Crack Crack" class="logo-imatge">
+        <p>&copy; 2026 CrackCrack. Tots els drets reservats.</p>
+    </footer>
+
+    <audio id="so-clack" src="pop.mp3"></audio>
+
+</body>
+</html>

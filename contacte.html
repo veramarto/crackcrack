@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crack Crack - El Joc</title>
+    <link rel="stylesheet" href="estils.css">
+</head>
+
+<body>
+
+    <header class="header">
+        <div class="logo-contenidor">
+            <img src="logocrackcrack.png" alt="Logo Crack Crack" class="logo-imatge">
+        </div>
+        <nav class="nav">
+            <a href="index.html" class="btn-nav">INICI</a>
+            <a href="joc.html" class="btn-nav">JOC</a>
+            <a href="contacte.html" class="btn-nav">REGISTRE</a>
+        </nav>
+    </header>
+
+    <section class="seccio-contacte">
+        <h2 class="titol-bowlby">REGISTRA'T</h2>
+        <form id="formulari-registre" class="form-estil" novalidate>
+            <div class="camp">
+                <label for="nom">Nom d'usuari:</label>
+                <input type="text" id="nom" placeholder="Escriu el teu nom...">
+                <span class="error-msg" id="error-nom">Aquest camp és obligatori</span>
+            </div>
+
+            <div class="camp">
+                <label for="email">Correu electrònic:</label>
+                <input type="email" id="email" placeholder="exemple@correu.com">
+                <span class="error-msg" id="error-email">Correu electrònic erroni!</span>
+            </div>
+
+            <div class="camp">
+                <label for="password">Contrasenya:</label>
+                <input type="password" id="password" placeholder="Mínim 6 caràcters">
+                <span class="error-msg" id="error-pass">Contrasenya errònia!</span>
+            </div>
+
+            <button type="submit" class="btn-enviar">ENVIAR!</button>
+        </form>
+    </section>
+
+    <footer class="footer">
+        <img src="logocrackcrack.png" alt="Logo Crack Crack" class="logo-imatge">
+        <p>&copy; 2026 CrackCrack. Tots els drets reservats.</p>
+    </footer>
+
+    <script>
+        document.getElementById('formulari-registre').addEventListener('submit', function(event) {
+            let esValid = true;
+
+            const nom = document.getElementById('nom');
+            const errorNom = document.getElementById('error-nom');
+            if (nom.value.trim() === "") {
+                errorNom.textContent = "Has de posar un nom!";
+                errorNom.style.display = "block";
+                nom.classList.add('input-error');
+                esValid = false;
+            } else {
+                errorNom.style.display = "none";
+                nom.classList.remove('input-error');
+            }
+
+            const email = document.getElementById('email');
+            const errorEmail = document.getElementById('error-email');
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email.value)) {
+                errorEmail.textContent = "Correu electrònic erroni!";
+                errorEmail.style.display = "block";
+                email.classList.add('input-error');
+                esValid = false;
+            } else {
+                errorEmail.style.display = "none";
+                email.classList.remove('input-error');
+            }
+
+            const pass = document.getElementById('password');
+            const errorPass = document.getElementById('error-pass');
+            if (pass.value.length < 6) {
+                errorPass.textContent = "Contrasenya errònia!";
+                errorPass.style.display = "block";
+                pass.classList.add('input-error');
+                esValid = false;
+            } else {
+                errorPass.style.display = "none";
+                pass.classList.remove('input-error');
+            }
+
+            if (!esValid) {
+                event.preventDefault();
+            } else {
+                alert("Benvingut a CrackCrack!");
+            }
+        });
+    </script>
+
+</body>
+</html>
