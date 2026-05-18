@@ -100,11 +100,12 @@ PantallaCarrega.prototype.preload = function () {
         frameHeight: 126
     });
 
+    this.load.audio('musicaFons', 'assets/CrackCrack.mp3');
     this.load.image('foc', 'assets/Foc.png');
     this.load.image('ganivet', 'assets/Ganivet.png');
     this.load.image('huevet', 'assets/Huevet.png');
     this.load.image('tilesCuina', 'assets/tileset.png');
-
+    this.load.image('particulaOu', 'assets/Emitter.png');
     this.load.tilemapTiledJSON('mapaNivell1','assets/mapa_nivell1.json');
 };
 
@@ -242,6 +243,17 @@ function configurarNivell(escena, puntuacioInicial, numeroNivell) {
     escena.physics.add.collider(jugador, llistaPlataformesMobils);
 
     escena.cameras.main.startFollow(jugador, true, 0.08, 0.08);
+
+    if (!escena.musica) {
+
+    escena.musica = escena.sound.add('musicaFons', {
+        volume: 0.2,
+        loop: true
+    });
+
+    escena.musica.play();
+}
+
 
     tecles = escena.input.keyboard.createCursorKeys();
 
@@ -618,6 +630,7 @@ function tocarEnemic(jugador, enemic) {
 }
 
 function morir(escena) {
+
     if (estaMort || haGuanyat) return;
 
     estaMort = true;
@@ -625,15 +638,46 @@ function morir(escena) {
     jugador.body.setVelocity(0, 0);
     jugador.body.allowGravity = false;
 
+    // EMITTER
+    for (let i = 0; i < 4; i++) {
+
+        const particula = escena.physics.add.image(
+            jugador.x,
+            jugador.y,
+            'particulaOu'
+        );
+
+        particula.setScale(0.15);
+
+        particula.setVelocity(
+            Phaser.Math.Between(-180, 180),
+            Phaser.Math.Between(-220, -60)
+        );
+
+        particula.setAngularVelocity(
+            Phaser.Math.Between(-200, 200)
+        );
+
+        particula.setGravityY(500);
+
+        escena.time.delayedCall(700, function () {
+            particula.destroy();
+        });
+    }
+
+    escena.cameras.main.shake(180, 0.008);
+
     jugador.anims.play('death', true);
 
     textPuntuacio.setText('GAME OVER');
 
     escena.time.delayedCall(1200, function () {
+
         escena.scene.start('PantallaFinal', {
             victoria: false,
             puntuacio: puntuacio
         });
+
     });
 }
 
